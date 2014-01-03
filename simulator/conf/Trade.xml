@@ -1,0 +1,24 @@
+<sim>
+  <setting name="etf" symbol="qqq,spy,lng,ntap" start_date="2000-01-01" start_balance="100000" trade_amount="20000" max_loss="-1000" max_stock="25" max_trade_per_day="5" held="10" profit_adjustment=".75" allow_duplicate="false">
+    <entry>
+      <priority type="buy" field="rsi2" order="asc" symbol="spy,qqq,lng" />
+      <priority type="short" field="rsi2" order="desc" symbol="spy,qqq,lng" />
+      <trigger action="buy">
+        <condition value1="rsi2" op="lt" value2="70" />
+        <condition value1="price" op="gt" value2="ma200" />
+      </trigger>
+      <trigger action="short">
+        <condition value1="rsi2" op="gt" value2="30" />
+        <condition value1="price" op="lt" value2="ma200" />
+      </trigger>
+    </entry>
+    <exit>
+      <trigger action="sell">
+        <condition value1="rsi2" op="gt" value2="75" />
+      </trigger>
+      <trigger action="cover">
+        <condition value1="rsi2" op="lt" value2="25" />
+      </trigger>
+    </exit>
+  </setting>
+</sim>
